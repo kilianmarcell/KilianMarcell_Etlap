@@ -1,13 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="hu.petrik.etlap.controllers.EtlapController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="471.0" prefWidth="592.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.etlap.controllers.EtlapController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button minWidth="100" mnemonicParsing="false" text="Új étel felvétele">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button minWidth="100" mnemonicParsing="false" text="Törlés">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+      <TitledPane animated="false" text="Áremelés">
+        <content>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Spinner />
+                        <Label text="\%">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Button minWidth="130.0" mnemonicParsing="false" text="Emelés">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Spinner />
+                        <Label text="Ft">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button minWidth="130.0" mnemonicParsing="false" text="Emelés">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+        </content>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TitledPane>
+      <TableView maxHeight="500" maxWidth="500" minHeight="200.0" minWidth="200.0" prefHeight="200" prefWidth="200">
+        <columns>
+          <TableColumn minWidth="90" prefWidth="240" text="Név" />
+          <TableColumn minWidth="65" prefWidth="130" text="Kategória" />
+          <TableColumn minWidth="45" prefWidth="110" text="Ár (Ft)" />
+        </columns>
+      </TableView>
+   </children>
 </VBox>
