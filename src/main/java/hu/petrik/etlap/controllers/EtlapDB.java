@@ -18,13 +18,19 @@ public class EtlapDB {
         }
     }
 
-    public List<Etlap> getEtel() throws SQLException {
+    public List<Etlap> getEtlap() throws SQLException {
         List<Etlap> etelek = new ArrayList<>();
         Statement stmt = con.createStatement();
         String sql = "SELECT * FROM etlap;";
         ResultSet result = stmt.executeQuery(sql);
         while (result.next()) {
             int id = result.getInt("id");
+            String nev = result.getString("nev");
+            String leiras = result.getString("leiras");
+            int ar = result.getInt("ar");
+            String kategoria = result.getString("kategoria");
+            Etlap etlap = new Etlap(id, ar, nev, leiras, kategoria);
+            etelek.add(etlap);
         }
         return etelek;
     }

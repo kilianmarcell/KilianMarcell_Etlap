@@ -88,7 +88,7 @@
             <Font size="14.0" />
          </font>
       </TitledPane>
-      <TableView maxHeight="500" maxWidth="563.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="555.0">
+      <TableView fx:id="dbTableView" maxHeight="500" maxWidth="563.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="555.0">
         <columns>
           <TableColumn fx:id="nevCol" minWidth="90" prefWidth="240" text="Név" />
           <TableColumn fx:id="kategoriaCol" minWidth="65" prefWidth="130" text="Kategória" />
