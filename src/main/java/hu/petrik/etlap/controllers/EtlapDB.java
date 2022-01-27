@@ -26,5 +26,6 @@ public class EtlapDB {
         while (result.next()) {
             int id = result.getInt("id");
         }
+        return etelek;
     }
 }
