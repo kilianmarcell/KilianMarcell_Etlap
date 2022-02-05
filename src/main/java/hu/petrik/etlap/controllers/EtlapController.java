@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -58,5 +59,10 @@ public class EtlapController {
 
     @FXML
     public void forintEmelesButton(ActionEvent actionEvent) {
+    }
+
+    public void etelClick(MouseEvent mouseEvent) {
+        Etlap etel = dbTableView.getSelectionModel().getSelectedItem();
+        elemLeirasArea.setText(etel.getLeiras());
     }
 }
