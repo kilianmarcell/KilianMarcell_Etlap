@@ -10,10 +10,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class EtlapController {
+public class EtlapController extends Controller {
 
     @FXML
     private TableView<Etlap> dbTableView;
@@ -51,6 +52,13 @@ public class EtlapController {
 
     @FXML
     public void etelFelvetelButton(ActionEvent actionEvent) {
+        try {
+            Controller felvetel = ujAblak("hozzaad-view.fxml", "Étel hozzáadása", 300, 400);
+            felvetel.getStage().setOnCloseRequest(event -> etlapListaUjratolt());
+            felvetel.getStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -64,5 +72,18 @@ public class EtlapController {
     public void etelClick(MouseEvent mouseEvent) {
         Etlap etel = dbTableView.getSelectionModel().getSelectedItem();
         elemLeirasArea.setText(etel.getLeiras());
+    }
+
+    private void etlapListaUjratolt() {
+        try {
+            List<Etlap> lista =db.getEtlap();
+            dbTableView.getItems().clear();
+
+            for (Etlap e : lista) {
+                dbTableView.getItems().add(e);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
