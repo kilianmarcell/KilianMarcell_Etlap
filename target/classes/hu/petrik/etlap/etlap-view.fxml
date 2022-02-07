@@ -29,6 +29,11 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Button>
+                        <ChoiceBox fx:id="szuresChoiceBox" prefHeight="46.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
                      </children>
                   </HBox>
                   <TitledPane animated="false" text="Áremelés">

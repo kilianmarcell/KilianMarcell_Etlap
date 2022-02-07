@@ -21,6 +21,8 @@ public class EtlapController extends Controller {
     @FXML
     public Spinner<Integer> szazalekEmelesSpinner;
     @FXML
+    public ChoiceBox<String> szuresChoiceBox;
+    @FXML
     private TableView<Etlap> dbTableView;
     @FXML
     private TableColumn<Etlap, Integer> arCol;
@@ -37,8 +39,20 @@ public class EtlapController extends Controller {
 
     private EtlapDB db;
     private KategoriaDB kdb;
+    private List<Kategoria> kategoriaLista;
 
     public void initialize() {
+        szuresChoiceBox.getItems().add("összes");
+        try {
+            kdb = new KategoriaDB();
+            kategoriaLista = kdb.getKategoria();
+            for (Kategoria k : kategoriaLista) {
+                szuresChoiceBox.getItems().add(k.getNev());
+            }
+        } catch (SQLException e) {
+            hibaKiir(e);
+        }
+
         db = new EtlapDB();
         kdb = new KategoriaDB();
 
@@ -48,6 +62,7 @@ public class EtlapController extends Controller {
 
         etlapListaUjratolt();
         kategoriaListaUjratolt();
+        szures();
     }
 
     @FXML
@@ -190,5 +205,23 @@ public class EtlapController extends Controller {
     }
 
     public void kategoriaTorlesButton(ActionEvent actionEvent) {
+    }
+
+    public void szures() {
+        szuresChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+            try {
+                if (newValue.equals("összes")) {
+                    etlapListaUjratolt();
+                } else {
+                    List<Etlap> szurtEtlapLista = db.getSzurtEtlap(newValue);
+                    dbTableView.getItems().clear();
+                    for (Etlap etlap : szurtEtlapLista) {
+                        dbTableView.getItems().add(etlap);
+                    }
+                }
+            } catch (SQLException e) {
+                hibaKiir(e);
+            }
+        });
     }
 }

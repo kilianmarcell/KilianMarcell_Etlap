@@ -86,4 +86,22 @@ public class EtlapDB {
         int erintettSorok = stmt.executeUpdate();
         return erintettSorok == 1;
     }
+
+    public List<Etlap> getSzurtEtlap(String kategoriaMegkotes) throws SQLException {
+        List<Etlap> etlapok = new ArrayList<>();
+        String sql = "SELECT * FROM etlap INNER JOIN kategoria ON (etlap.kategoria_id = kategoria.id) WHERE kategoria.nev = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1,kategoriaMegkotes);
+        ResultSet result = stmt.executeQuery();
+        while (result.next()) {
+            int id = result.getInt("etlap.id");
+            String nev = result.getString("etlap.nev");
+            String leiras = result.getString("etlap.leiras");
+            int ar = result.getInt("etlap.ar");
+            String kategoria = result.getString("kategoria.nev");
+            Etlap etlap = new Etlap(id, ar, nev, leiras, kategoria);
+            etlapok.add(etlap);
+        }
+        return etlapok;
+    }
 }
