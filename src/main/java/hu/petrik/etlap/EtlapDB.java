@@ -35,12 +35,12 @@ public class EtlapDB {
         return etelek;
     }
 
-    public int addEtel(String nev, String leiras, String kategoria, int ar) throws SQLException {
-        String sql = "INSERT INTO etlap (nev, leiras,  kategoria, ar) VALUES (?, ?, ?, ?)";
+    public int addEtel(String nev, String leiras, int kategoria, int ar) throws SQLException {
+        String sql = "INSERT INTO etlap (nev, leiras,  kategoria_id, ar) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nev);
         stmt.setString(2, leiras);
-        stmt.setString(3, kategoria);
+        stmt.setInt(3, kategoria);
         stmt.setInt(4, ar);
         return stmt.executeUpdate();
     }

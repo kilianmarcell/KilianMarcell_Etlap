@@ -62,6 +62,13 @@ public class HozzaadController extends Controller {
 
         String kSzoveg = kategoriaChoiceBox.getValue().toString();
 
+        int h = 0;
+        for (Kategoria k : kategoriaLista) {
+            if (k.getNev() == kSzoveg) {
+                h = k.getId();
+            }
+        }
+
         try {
             ar = arSpinner.getValue();
         } catch (NullPointerException e) {
@@ -71,7 +78,7 @@ public class HozzaadController extends Controller {
 
         try {
             EtlapDB db = new EtlapDB();
-            int siker = db.addEtel(nev, leiras, kSzoveg, ar);
+            int siker = db.addEtel(nev, leiras, h, ar);
             if (siker == 1) {
                 alert("Étel hozzáadása sikeres!");
             } else {
