@@ -66,5 +66,10 @@ public class HozzaadController extends Controller {
         } catch (Exception e) {
             hibaKiir(e);
         }
+
+        nevTextField.setText("");
+        leirasTextArea.setText("");
+        kategoriaChoiceBox.setValue("");
+        arSpinner.getValueFactory().setValue(0);
     }
 }
