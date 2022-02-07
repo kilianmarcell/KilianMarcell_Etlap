@@ -82,17 +82,46 @@ public class EtlapController extends Controller {
 
     @FXML
     public void szazalekEmelesButton(ActionEvent actionEvent) {
+        int emeles = szazalekEmelesSpinner.getValue();
+
+        int selectedIndex = dbTableView.getSelectionModel().getSelectedIndex();
+        Etlap emelesEtel = dbTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedIndex == -1) {
+            if (!confirm("Biztos emelni szeretné az összes étel árát " + emeles + "%-kal?")) {
+                return;
+            }
+            try {
+                db.emelSzazalekOsszes(emeles);
+                alert("Sikeres emelés!");
+                etlapListaUjratolt();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (!confirm("Biztos emelni szeretné " + emeles + "%-kal az étel árát?")) {
+                return;
+            }
+            try {
+                db.emelSzazalek(emelesEtel.getId(), emeles);
+                alert("Sikeres emelés!");
+                etlapListaUjratolt();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
     public void forintEmelesButton(ActionEvent actionEvent) {
+
         int emeles = forintEmelesSpinner.getValue();
 
         int selectedIndex = dbTableView.getSelectionModel().getSelectedIndex();
         Etlap emelEtel = dbTableView.getSelectionModel().getSelectedItem();
 
         if (selectedIndex == -1) {
-            if (!confirm("Biztos emelni szeretné az összes étel árát?")) {
+            if (!confirm("Biztos emelni szeretné az összes étel árát " + emeles + " forinttal?")) {
                 return;
             }
             try {
@@ -103,7 +132,7 @@ public class EtlapController extends Controller {
                 e.printStackTrace();
             }
         } else {
-            if (!confirm("Biztos emelni szeretné az étel árát?")) {
+            if (!confirm("Biztos emelni szeretné " + emeles + " forinttal az étel árát?")) {
                 return;
             }
             try {
