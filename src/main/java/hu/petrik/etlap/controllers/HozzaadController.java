@@ -1,12 +1,17 @@
 package hu.petrik.etlap.controllers;
 
 import hu.petrik.etlap.EtlapDB;
+import hu.petrik.etlap.Kategoria;
+import hu.petrik.etlap.KategoriaDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class HozzaadController extends Controller {
 
@@ -19,8 +24,19 @@ public class HozzaadController extends Controller {
     @FXML
     public Spinner<Integer> arSpinner;
 
+    private KategoriaDB kdb;
+    private List<Kategoria> kategoriaLista;
+
     public void initialize() {
-        kategoriaChoiceBox.getItems().addAll("előétel", "főétel", "desszert");
+        try {
+            kdb = new KategoriaDB();
+            kategoriaLista = kdb.getKategoria();
+            for (Kategoria kategoria : kategoriaLista) {
+                kategoriaChoiceBox.getItems().add(kategoria.getNev());
+            }
+        } catch (SQLException e) {
+            hibaKiir(e);
+        }
     }
 
     public void hozzaadButton(ActionEvent actionEvent) {

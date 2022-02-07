@@ -29,14 +29,14 @@ public class KategoriaDB {
         return kategoriak;
     }
 
-    public int kategoriaHozzaadasa(String nev) throws SQLException {
+    public int kategoriaHozzaadas(String nev) throws SQLException {
         String sql = "INSERT INTO kategoria (nev) VALUES (?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nev);
         return stmt.executeUpdate();
     }
 
-    public boolean kategoriaTorlese(int id) throws SQLException {
+    public boolean kategoriaTorles(int id) throws SQLException {
         String sql = "DELETE FROM kategoria WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);

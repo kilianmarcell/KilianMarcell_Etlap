@@ -180,6 +180,13 @@ public class EtlapController extends Controller {
     }
 
     public void kategoriaHozzaadasButton(ActionEvent actionEvent) {
+        try {
+            Controller kategoriaHozzadas = ujAblak("kategoria-hozzaad-view.fxml", "Kategória hozzáadása", 250, 150);
+            kategoriaHozzadas.getStage().setOnCloseRequest(event -> kategoriaListaUjratolt());
+            kategoriaHozzadas.getStage().show();
+        } catch (Exception e) {
+            hibaKiir(e);
+        }
     }
 
     public void kategoriaTorlesButton(ActionEvent actionEvent) {
