@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class HozzaadController extends Controller {
     @FXML
     public TextField nevTextField;
     @FXML
-    public TextField leirasTextField;
+    public TextArea leirasTextArea;
     @FXML
     public ChoiceBox<String> kategoriaChoiceBox;
     @FXML
@@ -26,7 +27,7 @@ public class HozzaadController extends Controller {
 
     public void hozzaadButton(ActionEvent actionEvent) {
         String nev = nevTextField.getText().toString();
-        String leiras = leirasTextField.getText().toString();
+        String leiras = leirasTextArea.getText().toString();
         int kategoria = kategoriaChoiceBox.getSelectionModel().getSelectedIndex();
         int ar;
 
