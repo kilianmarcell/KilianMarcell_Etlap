@@ -44,4 +44,12 @@ public class EtlapDB {
         stmt.setInt(4, ar);
         return stmt.executeUpdate();
     }
+
+    public boolean deleteEtel(int id) throws SQLException {
+        String sql = "DELETE FROM etlap WHERE id = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        int sor = stmt.executeUpdate();
+        return sor == 1;
+    }
 }

@@ -48,6 +48,19 @@ public class EtlapController extends Controller {
 
     @FXML
     public void torlesButton(ActionEvent actionEvent) {
+        int selectedIndex = dbTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
+            alert("A törléshez előbb válasszon ki egy elemet a táblázatból");
+            return;
+        }
+        Etlap torlendoEtel = dbTableView.getSelectionModel().getSelectedItem();
+        try {
+            db.deleteEtel(torlendoEtel.getId());
+            alert("Sikeres törlés");
+            etlapListaUjratolt();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
