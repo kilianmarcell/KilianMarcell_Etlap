@@ -60,6 +60,8 @@ public class EtlapController extends Controller {
         kategoriaCol.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
         arCol.setCellValueFactory(new PropertyValueFactory<>("ar"));
 
+        kategoriaTableCol.setCellValueFactory(new PropertyValueFactory<>("nev"));
+
         etlapListaUjratolt();
         kategoriaListaUjratolt();
         szures();
@@ -205,6 +207,22 @@ public class EtlapController extends Controller {
     }
 
     public void kategoriaTorlesButton(ActionEvent actionEvent) {
+        int selectedIndex = kategoriaTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
+            alert("A törléshez válasszon ki egy elemet a táblázatból!");
+            return;
+        }
+        Kategoria torlendoKategoria = kategoriaTableView.getSelectionModel().getSelectedItem();
+        if (!confirm("Biztosan törölni szeretnéd a kategóriát?")) {
+            return;
+        }
+        try {
+            kdb.kategoriaTorles(torlendoKategoria.getId());
+            alert("Sikeres törlés!");
+            kategoriaListaUjratolt();
+        } catch (SQLException e) {
+            hibaKiir(e);
+        }
     }
 
     public void szures() {

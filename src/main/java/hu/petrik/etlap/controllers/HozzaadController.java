@@ -70,10 +70,10 @@ public class HozzaadController extends Controller {
         }
 
         try {
-            EtlapDB etlapDB = new EtlapDB();
-            int siker = etlapDB.addEtel(nev, leiras, kSzoveg, ar);
+            EtlapDB db = new EtlapDB();
+            int siker = db.addEtel(nev, leiras, kSzoveg, ar);
             if (siker == 1) {
-                alert("Étetl hozzáadása sikeres!");
+                alert("Étel hozzáadása sikeres!");
             } else {
                 alert("Étel hozzáadása sikertelen!");
             }

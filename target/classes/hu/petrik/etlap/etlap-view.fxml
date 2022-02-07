@@ -136,7 +136,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="kategoriaTableView" prefHeight="528.0" prefWidth="592.0">
+                  <TableView fx:id="kategoriaTableView" prefHeight="504.0" prefWidth="457.0">
                     <columns>
                       <TableColumn fx:id="kategoriaTableCol" prefWidth="591.0" text="Kategóriák" />
                     </columns>

@@ -21,8 +21,8 @@ public class KategoriaDB {
         String sql = "SELECT * FROM kategoria";
         ResultSet result = stmt.executeQuery(sql);
         while (result.next()) {
-            int id = result.getInt("id");
-            String nev = result.getString("nev");
+            int id = result.getInt("kategoria.id");
+            String nev = result.getString("kategoria.nev");
             Kategoria kategoria = new Kategoria(id, nev);
             kategoriak.add(kategoria);
         }
