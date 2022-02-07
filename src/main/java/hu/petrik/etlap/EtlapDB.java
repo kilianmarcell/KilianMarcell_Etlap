@@ -1,4 +1,4 @@
-package hu.petrik.etlap.controllers;
+package hu.petrik.etlap;
 
 import hu.petrik.etlap.Etlap;
 
@@ -21,14 +21,14 @@ public class EtlapDB {
     public List<Etlap> getEtlap() throws SQLException {
         List<Etlap> etelek = new ArrayList<>();
         Statement stmt = con.createStatement();
-        String sql = "SELECT * FROM etlap;";
+        String sql = "SELECT * FROM etlap INNER JOIN kategoria ON (etlap.kategoria_id = kategoria.id)";
         ResultSet result = stmt.executeQuery(sql);
         while (result.next()) {
-            int id = result.getInt("id");
-            String nev = result.getString("nev");
-            String leiras = result.getString("leiras");
-            int ar = result.getInt("ar");
-            String kategoria = result.getString("kategoria");
+            int id = result.getInt("etlap.id");
+            String nev = result.getString("etlap.nev");
+            String leiras = result.getString("etlap.leiras");
+            int ar = result.getInt("etlap.ar");
+            String kategoria = result.getString("kategoria.nev");
             Etlap etlap = new Etlap(id, ar, nev, leiras, kategoria);
             etelek.add(etlap);
         }

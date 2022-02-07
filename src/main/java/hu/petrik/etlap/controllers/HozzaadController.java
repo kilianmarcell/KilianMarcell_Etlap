@@ -1,14 +1,12 @@
 package hu.petrik.etlap.controllers;
 
-import hu.petrik.etlap.Etlap;
+import hu.petrik.etlap.EtlapDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import java.sql.SQLException;
 
 public class HozzaadController extends Controller {
 

@@ -1,6 +1,9 @@
 package hu.petrik.etlap.controllers;
 
 import hu.petrik.etlap.Etlap;
+import hu.petrik.etlap.EtlapDB;
+import hu.petrik.etlap.Kategoria;
+import hu.petrik.etlap.KategoriaDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,24 +30,24 @@ public class EtlapController extends Controller {
     private TableColumn<Etlap, String> kategoriaCol;
     @FXML
     private TextArea elemLeirasArea;
+    @FXML
+    public TableColumn<Kategoria, String> kategoriaTableCol;
+    @FXML
+    public TableView<Kategoria> kategoriaTableView;
 
     private EtlapDB db;
+    private KategoriaDB kdb;
 
     public void initialize() {
+        db = new EtlapDB();
+        kdb = new KategoriaDB();
+
         nevCol.setCellValueFactory(new PropertyValueFactory<>("nev"));
         kategoriaCol.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
         arCol.setCellValueFactory(new PropertyValueFactory<>("ar"));
 
-        try {
-            db = new EtlapDB();
-            List<Etlap> lista = db.getEtlap();
-
-            for (Etlap e : lista) {
-                dbTableView.getItems().add(e);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        etlapListaUjratolt();
+        kategoriaListaUjratolt();
     }
 
     @FXML
@@ -152,14 +155,33 @@ public class EtlapController extends Controller {
 
     private void etlapListaUjratolt() {
         try {
-            List<Etlap> lista =db.getEtlap();
+            List<Etlap> etlapLista = db.getEtlap();
             dbTableView.getItems().clear();
 
-            for (Etlap e : lista) {
+            for (Etlap e : etlapLista) {
                 dbTableView.getItems().add(e);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void kategoriaListaUjratolt() {
+        try {
+            List<Kategoria> kategoriaLista = kdb.getKategoria();
+            kategoriaTableView.getItems().clear();
+
+            for (Kategoria k : kategoriaLista) {
+                kategoriaTableView.getItems().add(k);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void kategoriaHozzaadasButton(ActionEvent actionEvent) {
+    }
+
+    public void kategoriaTorlesButton(ActionEvent actionEvent) {
     }
 }

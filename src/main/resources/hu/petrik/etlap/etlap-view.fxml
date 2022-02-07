@@ -5,97 +5,140 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="636.0" prefWidth="632.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.etlap.controllers.EtlapController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button minWidth="100" mnemonicParsing="false" onAction="#etelFelvetelButton" text="Új étel felvétele">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button minWidth="100" mnemonicParsing="false" onAction="#torlesButton" text="Törlés">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin></Button>
-         </children>
-      </HBox>
-      <TitledPane animated="false" text="Áremelés">
-        <content>
-            <VBox>
+<TabPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.etlap.controllers.EtlapController">
+   <tabs>
+      <Tab closable="false" text="Étlap">
+         <content>
+            <VBox alignment="CENTER" prefHeight="636.0" prefWidth="632.0" spacing="20.0">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Spinner fx:id="szazalekEmelesSpinner" editable="true">
-                           <valueFactory>
-                              <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="5" min="5" max="50"/>
-                           </valueFactory>
-                        </Spinner>
-                        <Label text="\%">
+                        <Button minWidth="100" mnemonicParsing="false" onAction="#etelFelvetelButton" text="Új étel felvétele">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="5.0" />
-                           </padding>
-                        </Label>
-                        <Button minWidth="130.0" mnemonicParsing="false" onAction="#szazalekEmelesButton" text="Emelés">
+                        </Button>
+                        <Button minWidth="100" mnemonicParsing="false" onAction="#torlesButton" text="Törlés">
                            <font>
                               <Font size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Spinner fx:id="forintEmelesSpinner" editable="true">
-                           <valueFactory>
-                              <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="50" min="50" max="3000"/>
-                           </valueFactory>
-                        </Spinner>
-                        <Label text="Ft">
-                           <padding>
-                              <Insets left="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Button minWidth="130.0" mnemonicParsing="false" onAction="#forintEmelesButton" text="Emelés">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <TitledPane animated="false" text="Áremelés">
+                    <content>
+                        <VBox>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Spinner fx:id="szazalekEmelesSpinner" editable="true">
+                                       <valueFactory>
+                                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="5" max="50" min="5" />
+                                       </valueFactory>
+                                    </Spinner>
+                                    <Label text="\%">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Button minWidth="130.0" mnemonicParsing="false" onAction="#szazalekEmelesButton" text="Emelés">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Spinner fx:id="forintEmelesSpinner" editable="true">
+                                       <valueFactory>
+                                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="50" max="3000" min="50" />
+                                       </valueFactory>
+                                    </Spinner>
+                                    <Label text="Ft">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button minWidth="130.0" mnemonicParsing="false" onAction="#forintEmelesButton" text="Emelés">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                    </content>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TitledPane>
+                  <TableView fx:id="dbTableView" maxHeight="500" maxWidth="563.0" minHeight="200.0" minWidth="200.0" onMouseClicked="#etelClick" prefHeight="200.0" prefWidth="555.0">
+                    <columns>
+                      <TableColumn fx:id="nevCol" minWidth="90" prefWidth="240" text="Név" />
+                      <TableColumn fx:id="kategoriaCol" minWidth="65" prefWidth="130" text="Kategória" />
+                      <TableColumn fx:id="arCol" minWidth="45" prefWidth="110" text="Ár (Ft)" />
+                    </columns>
+                  </TableView>
+                  <TextArea fx:id="elemLeirasArea" prefHeight="242.0" prefWidth="592.0" />
                </children>
             </VBox>
-        </content>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TitledPane>
-      <TableView fx:id="dbTableView" maxHeight="500" maxWidth="563.0" minHeight="200.0" minWidth="200.0" onMouseClicked="#etelClick" prefHeight="200.0" prefWidth="555.0">
-        <columns>
-          <TableColumn fx:id="nevCol" minWidth="90" prefWidth="240" text="Név" />
-          <TableColumn fx:id="kategoriaCol" minWidth="65" prefWidth="130" text="Kategória" />
-          <TableColumn fx:id="arCol" minWidth="45" prefWidth="110" text="Ár (Ft)" />
-        </columns>
-      </TableView>
-      <TextArea fx:id="elemLeirasArea" prefHeight="242.0" prefWidth="592.0" />
-   </children>
-</VBox>
+         </content>
+      </Tab>
+      <Tab closable="false" text="Kategória">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="636.0" prefWidth="632.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="97.0" prefWidth="496.0">
+                     <children>
+                        <Button minWidth="100" mnemonicParsing="false" onAction="#kategoriaHozzaadasButton" text="Hozzáadás">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button minWidth="100" mnemonicParsing="false" onAction="#kategoriaTorlesButton" text="Törlés">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="kategoriaTableView" prefHeight="528.0" prefWidth="592.0">
+                    <columns>
+                      <TableColumn fx:id="kategoriaTableCol" prefWidth="591.0" text="Kategóriák" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
