@@ -52,4 +52,38 @@ public class EtlapDB {
         int sor = stmt.executeUpdate();
         return sor == 1;
     }
+
+    public boolean emelSzazalek(int id, int szazalek) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar * ((100 + ?) / 100) WHERE id = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, szazalek);
+        stmt.setInt(2, id);
+        int erintettSorok = stmt.executeUpdate();
+        return erintettSorok == 1;
+    }
+
+    public boolean emelSzazalekOsszes(int szazalek) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar * ((100 + ?) / 100)";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, szazalek);
+        int erintettSorok = stmt.executeUpdate();
+        return erintettSorok == 1;
+    }
+
+    public boolean emelForint(int id, int ft) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar + ? WHERE id = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, ft);
+        stmt.setInt(2, id);
+        int erintettSorok = stmt.executeUpdate();
+        return erintettSorok == 1;
+    }
+
+    public boolean emelForintOsszes(int ft) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar + ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, ft);
+        int erintettSorok = stmt.executeUpdate();
+        return erintettSorok == 1;
+    }
 }

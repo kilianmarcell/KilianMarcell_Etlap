@@ -10,6 +10,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,7 +40,7 @@ public class Controller {
         alert.show();
     }
 
-    protected void hibaKiir(Exception e) {
+    public void hibaKiir(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Hiba");
         alert.setHeaderText(e.getClass().toString());
@@ -48,8 +49,23 @@ public class Controller {
         alertTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> alert.show());
+                Platform.runLater(alert::show);
             }
         }, 500);
+    }
+
+    public boolean confirm(String uzenet) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Biztos?");
+        alert.setContentText(uzenet);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
+    }
+
+    public void alertWait(String uzenet) {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setContentText(uzenet);
+        alert.getButtonTypes().add(ButtonType.OK);
+        alert.showAndWait();
     }
 }

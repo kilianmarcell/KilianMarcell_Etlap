@@ -3,10 +3,7 @@ package hu.petrik.etlap.controllers;
 import hu.petrik.etlap.Etlap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -16,6 +13,10 @@ import java.util.List;
 
 public class EtlapController extends Controller {
 
+    @FXML
+    public Spinner<Integer> forintEmelesSpinner;
+    @FXML
+    public Spinner<Integer> szazalekEmelesSpinner;
     @FXML
     private TableView<Etlap> dbTableView;
     @FXML
@@ -53,6 +54,11 @@ public class EtlapController extends Controller {
             alert("A törléshez előbb válasszon ki egy elemet a táblázatból");
             return;
         }
+
+        if (!confirm("Biztosan törölni szeretné az ételt?")) {
+            return;
+        }
+
         Etlap torlendoEtel = dbTableView.getSelectionModel().getSelectedItem();
         try {
             db.deleteEtel(torlendoEtel.getId());
@@ -80,6 +86,34 @@ public class EtlapController extends Controller {
 
     @FXML
     public void forintEmelesButton(ActionEvent actionEvent) {
+        int emeles = forintEmelesSpinner.getValue();
+
+        int selectedIndex = dbTableView.getSelectionModel().getSelectedIndex();
+        Etlap emelEtel = dbTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedIndex == -1) {
+            if (!confirm("Biztos emelni szeretné az összes étel árát?")) {
+                return;
+            }
+            try {
+                db.emelForintOsszes(emeles);
+                alert("Sikeres emelés!");
+                etlapListaUjratolt();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (!confirm("Biztos emelni szeretné az étel árát?")) {
+                return;
+            }
+            try {
+                db.emelForint(emelEtel.getId(), emeles);
+                alert("Sikeres emelés!");
+                etlapListaUjratolt();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void etelClick(MouseEvent mouseEvent) {
